@@ -1,0 +1,14 @@
+package com.seasolutions.stock_management;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+
+
+@SpringBootApplication()
+public class Application {
+	public static void main(String[] args) {
+		SpringApplication.run(com.seasolutions.stock_management.Application.class, args);
+	}
+
+
+}
