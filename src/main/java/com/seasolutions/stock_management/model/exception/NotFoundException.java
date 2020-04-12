@@ -1,4 +1,4 @@
-package com.seasolutions.stock_management.exception;
+package com.seasolutions.stock_management.model.exception;
 
 public class NotFoundException extends RuntimeException {
 

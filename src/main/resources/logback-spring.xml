@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <jmxConfigurator />
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <property name="LOG_FILE" value="${LOG_PATH}/${LOG_FILE}"/>
+    <include resource="org/springframework/boot/logging/logback/file-appender.xml" />
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+
+    <appender name="ROLLIN-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+
+            <maxFileSize>100MB</maxFileSize>
+            <maxHistory>500</maxHistory>
+            <totalSizeCap>10GB</totalSizeCap>
+            <fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd}_%i.gz</fileNamePattern>
+
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%date [%thread] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </encoder>
+
+    </appender>
+
+    <root level="INFO">
+        <appender-ref ref="ROLLIN-FILE" />
+        <appender-ref ref="CONSOLE" />
+    </root>
+</configuration>

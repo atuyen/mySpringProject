@@ -1,8 +1,9 @@
 package com.seasolutions.stock_management.config;
 
-import com.seasolutions.stock_management.exception.NotFoundException;
+import com.seasolutions.stock_management.model.exception.*;
 import com.seasolutions.stock_management.model.support.response_wrapper.*;
 import javassist.tools.rmi.ObjectNotFoundException;
+import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -12,12 +13,12 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
+
+
+@Log4j2
 @RestControllerAdvice
 public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHandler {
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     @ExceptionHandler({
@@ -27,13 +28,38 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
         return handleException(e, request, new NotFoundResponseWrapper(e.getMessage()), HttpStatus.NOT_FOUND, false);
     }
 
+    @ExceptionHandler({
+            BadArgumentException.class
+    })
+    public ResponseEntity<Object> handleBadArgumentException(final BadArgumentException e, final WebRequest request) {
+        return handleException(e, request, new BadRequestResponseWrapper(e.getData()), HttpStatus.BAD_REQUEST, false);
+    }
+
+    @ExceptionHandler({
+            IllegalArgumentException.class
+    })
+    public ResponseEntity<Object> handleIllegalArgumentException(final IllegalArgumentException e, final WebRequest request) {
+        return handleException(e, request, new BadRequestResponseWrapper(), HttpStatus.BAD_REQUEST, false);
+    }
 
 
+    @ExceptionHandler({
+            InternalServerErrorException.class
+    })
+    public ResponseEntity<Object> handleInternalServerErrorException(final InternalServerErrorException e, final WebRequest request) {
+        return handleException(e, request, new BadRequestResponseWrapper(e.getMessage()), HttpStatus.BAD_REQUEST, false);
+    }
 
 
+    @ExceptionHandler(AuthenticationException.class)
+    public ResponseEntity<Object> handleAuthenticationException(final Exception e, final WebRequest request) {
+        return handleException(e, request, new UnAuthenticatedResponseWrapper(), HttpStatus.UNAUTHORIZED, false);
+    }
 
-
-
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<Object> handleAuthorizationException(final Exception e, final WebRequest request) {
+        return handleException(e, request, new UnauthorizedRequestResponseWrapper(), HttpStatus.UNAUTHORIZED, false);
+    }
 
     @ExceptionHandler({
             Exception.class, RuntimeException.class
@@ -42,10 +68,36 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
         try {
             sendErrorToServer(e);
         } catch (Throwable t) {
-            logger.error("Failed to send error to server", t);
+            logger.error("Failed to send slack server error message", t);
         }
         return handleException(e, request, new ExceptionResponseWrapper(e), HttpStatus.INTERNAL_SERVER_ERROR, true);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     private void sendErrorToServer(Exception e){
@@ -68,8 +120,8 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
             final WebRequest request,
             final Object responseData,
             final HttpStatus statusCode,
-            final boolean logException) {
-        if (logException) {
+            final boolean logDetailException) {
+        if (logDetailException) {
             this.logException(e);
         } else {
             this.logExceptionSlim(e);
@@ -84,7 +136,7 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
                                                              final HttpStatus status,
                                                              final WebRequest request) {
         Object actualBody = body;
-        if (!(body instanceof WrapperResponse)) {
+        if (!(body instanceof BaseResponseWrapper)) {
             actualBody = new FailedResponseWrapper(e.getMessage());
         }
         return super.handleExceptionInternal(e, actualBody, headers, status, request);
@@ -93,13 +145,7 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
 
 
     private void logException(final Throwable e) {
-        if (logger.isDebugEnabled()) {
-            logger.debug(e.getMessage(), e);
-        } else if (logger.isWarnEnabled()) {
-            logger.warn(e.getMessage(), e);
-        } else {
-            logger.error(e.getMessage(), e);
-        }
+       log.error(e.getMessage(),e);
     }
 
     private void logExceptionSlim(final Throwable e) {
@@ -120,13 +166,7 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
             i++;
         } while (current != null && i < 5);
 
-        if (logger.isDebugEnabled()) {
-            logger.debug(builder.toString());
-        } else if (logger.isWarnEnabled()) {
-            logger.warn(builder.toString());
-        } else {
-            logger.error(builder.toString());
-        }
+        log.error(builder.toString());
     }
 
 

@@ -2,7 +2,7 @@ package com.seasolutions.stock_management.controller;
 
 
 import com.seasolutions.stock_management.model.support.SortOptions;
-import com.seasolutions.stock_management.model.support.filter.CompanyFilter;
+import com.seasolutions.stock_management.model.support.entity_filter.CompanyEntityFilter;
 import com.seasolutions.stock_management.model.view_model.CompanyViewModel;
 import com.seasolutions.stock_management.service.interfaces.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class CompanyController {
 
 
     @GetMapping
-    List<CompanyViewModel> getCompanies(SortOptions sortOptions, CompanyFilter filter){
+    List<CompanyViewModel> getCompanies(SortOptions sortOptions, CompanyEntityFilter filter){
         return  companyService.findAll(sortOptions,filter);
     }
 

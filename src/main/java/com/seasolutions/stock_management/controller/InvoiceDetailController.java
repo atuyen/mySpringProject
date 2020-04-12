@@ -2,7 +2,7 @@ package com.seasolutions.stock_management.controller;
 
 
 import com.seasolutions.stock_management.model.support.SortOptions;
-import com.seasolutions.stock_management.model.support.filter.InvoiceDetailFilter;
+import com.seasolutions.stock_management.model.support.entity_filter.InvoiceDetailEntityFilter;
 import com.seasolutions.stock_management.model.view_model.InvoiceDetailViewModel;
 import com.seasolutions.stock_management.service.interfaces.IInvoiceDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +21,7 @@ public class InvoiceDetailController {
 
 
     @RequestMapping
-    List<InvoiceDetailViewModel> test(SortOptions sortOptions, InvoiceDetailFilter filter){
+    List<InvoiceDetailViewModel> test(SortOptions sortOptions, InvoiceDetailEntityFilter filter){
         return  invoiceDetailService.findAll(sortOptions,filter);
 
     }

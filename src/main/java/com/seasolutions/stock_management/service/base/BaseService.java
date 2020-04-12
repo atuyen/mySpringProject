@@ -1,10 +1,13 @@
 package com.seasolutions.stock_management.service.base;
 
-import com.seasolutions.stock_management.exception.NotFoundException;
+import com.seasolutions.stock_management.model.entity.BaseModel;
+import com.seasolutions.stock_management.model.exception.BadArgumentException;
+import com.seasolutions.stock_management.model.exception.NotFoundException;
 import com.seasolutions.stock_management.model.support.PaginatedResponse;
 import com.seasolutions.stock_management.model.support.PaginationOptions;
 import com.seasolutions.stock_management.model.support.SortOptions;
-import com.seasolutions.stock_management.model.support.filter.Filter;
+import com.seasolutions.stock_management.model.support.entity_filter.EntityFilter;
+import com.seasolutions.stock_management.model.view_model.BaseViewModel;
 import com.seasolutions.stock_management.repository.base.IBaseRepository;
 import com.seasolutions.stock_management.util.MappingUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @Transactional
-public class BaseService<T,V> implements IBaseService<T,V> {
+public class BaseService<T,V extends BaseViewModel> implements IBaseService<T,V> {
 
     private Class<T> tClass;
     private Class<V> vClass;
@@ -33,14 +36,14 @@ public class BaseService<T,V> implements IBaseService<T,V> {
     IBaseRepository<T> baseRepository;
 
     @Override
-    public List<V> findAll(SortOptions sortOptions, Filter filter) {
+    public List<V> findAll(SortOptions sortOptions, EntityFilter filter) {
         List<T> models = baseRepository.findAll(sortOptions,filter);
         List<V> viewModels = convertModelsToViewModels(models);
         return  viewModels;
     }
 
     @Override
-    public PaginatedResponse<V> findAll(PaginationOptions paginationOptions, SortOptions sortOptions,Filter filter) {
+    public PaginatedResponse<V> findAll(PaginationOptions paginationOptions, SortOptions sortOptions, EntityFilter filter) {
         AtomicLong totalRecord = new AtomicLong();
         List<T> models = baseRepository.findAll(paginationOptions,sortOptions,filter,totalRecord);
         List<V> viewModels =convertModelsToViewModels(models);
@@ -51,7 +54,7 @@ public class BaseService<T,V> implements IBaseService<T,V> {
     public V findById(long id) {
         T t = baseRepository.findById(id);
         if(t==null){
-           throw new NotFoundException("No resource found");
+           throw new NotFoundException("No resource found ("+tClass.getSimpleName()+" "+id +")");
         }
         V v = MappingUtils.map(t,vClass);
         return v;
@@ -66,6 +69,9 @@ public class BaseService<T,V> implements IBaseService<T,V> {
 
     @Override
     public V update(V v) {
+        if(v.getId()==0){
+            throw new BadArgumentException("Id must not be null");
+        }
         T t = MappingUtils.map(v,tClass);
         t = baseRepository.update(t);
         return MappingUtils.map(t,vClass);

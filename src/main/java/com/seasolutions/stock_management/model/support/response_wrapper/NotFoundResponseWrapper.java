@@ -1,9 +1,12 @@
 package com.seasolutions.stock_management.model.support.response_wrapper;
 
-public class NotFoundResponseWrapper implements WrapperResponse<Void> {
-    private String message = "Not found";
+import com.seasolutions.stock_management.model.support.enumerable.ResponseStatuses;
 
-    public NotFoundResponseWrapper() { }
+public class NotFoundResponseWrapper extends BaseResponseWrapper<Void> {
+
+    public NotFoundResponseWrapper() {
+        this.message="Not found";
+    }
 
     public NotFoundResponseWrapper(String message) {
         if (message != null) {
@@ -17,8 +20,8 @@ public class NotFoundResponseWrapper implements WrapperResponse<Void> {
     }
 
     @Override
-    public String getStatus() {
-        return "fail";
+    public ResponseStatuses getStatus() {
+        return ResponseStatuses.FAILED;
     }
 
     @Override

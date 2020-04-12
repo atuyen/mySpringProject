@@ -1,4 +1,4 @@
-package com.seasolutions.stock_management.model.support.filter;
+package com.seasolutions.stock_management.model.support.entity_filter;
 
 
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class CompanyFilter implements Filter {
+public class CompanyEntityFilter implements EntityFilter {
     private String transactionName;
     private Map<String,Object> params = new HashMap<>();
 

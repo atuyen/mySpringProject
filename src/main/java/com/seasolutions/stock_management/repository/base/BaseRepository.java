@@ -2,7 +2,7 @@ package com.seasolutions.stock_management.repository.base;
 
 import com.seasolutions.stock_management.model.support.PaginationOptions;
 import com.seasolutions.stock_management.model.support.SortOptions;
-import com.seasolutions.stock_management.model.support.filter.Filter;
+import com.seasolutions.stock_management.model.support.entity_filter.EntityFilter;
 import com.seasolutions.stock_management.repository.support.IDataManagerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,7 +29,7 @@ public class BaseRepository<T> implements IBaseRepository<T> {
     protected IDataManagerTemplate<T> dataManagerTemplate;
 
     @Override
-    public List<T> findAll(SortOptions sortOptions, Filter filter) {
+    public List<T> findAll(SortOptions sortOptions, EntityFilter filter) {
         return dataManagerTemplate.findAll(zClass, sortOptions,filter);
     }
 
@@ -39,7 +39,7 @@ public class BaseRepository<T> implements IBaseRepository<T> {
     }
 
     @Override
-    public List<T> findAll(PaginationOptions paginationOptions, SortOptions sortOptions,Filter filter, AtomicLong totalRecord) {
+    public List<T> findAll(PaginationOptions paginationOptions, SortOptions sortOptions, EntityFilter filter, AtomicLong totalRecord) {
         return dataManagerTemplate.findAll(zClass, paginationOptions, sortOptions,filter, totalRecord);
     }
 

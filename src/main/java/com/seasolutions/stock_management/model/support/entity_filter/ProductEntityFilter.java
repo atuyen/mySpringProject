@@ -1,4 +1,4 @@
-package com.seasolutions.stock_management.model.support.filter;
+package com.seasolutions.stock_management.model.support.entity_filter;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class ProductFilter implements Filter {
+public class ProductEntityFilter implements EntityFilter {
     private BigDecimal minCost;
     private Integer maxNumber;
     private String companyName;

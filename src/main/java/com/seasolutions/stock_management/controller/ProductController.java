@@ -3,7 +3,7 @@ package com.seasolutions.stock_management.controller;
 import com.seasolutions.stock_management.model.support.PaginatedResponse;
 import com.seasolutions.stock_management.model.support.PaginationOptions;
 import com.seasolutions.stock_management.model.support.SortOptions;
-import com.seasolutions.stock_management.model.support.filter.ProductFilter;
+import com.seasolutions.stock_management.model.support.entity_filter.ProductEntityFilter;
 import com.seasolutions.stock_management.model.view_model.ProductViewModel;
 import com.seasolutions.stock_management.service.interfaces.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,13 +21,13 @@ public class ProductController {
 
 
     @GetMapping
-    List<ProductViewModel> findAll(SortOptions sortOptions, ProductFilter filter){
+    List<ProductViewModel> findAll(SortOptions sortOptions, ProductEntityFilter filter){
         return  productService.findAll(sortOptions,filter);
     }
 
     @GetMapping
     @RequestMapping(path = "/paging")
-    PaginatedResponse<ProductViewModel> findAll(PaginationOptions paginationOptions, SortOptions sortOptions,ProductFilter filter){
+    PaginatedResponse<ProductViewModel> findAll(PaginationOptions paginationOptions, SortOptions sortOptions, ProductEntityFilter filter){
         return  productService.findAll(paginationOptions,sortOptions,filter);
     }
 

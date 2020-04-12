@@ -1,4 +1,4 @@
-package com.seasolutions.stock_management.model.support.filter;
+package com.seasolutions.stock_management.model.support.entity_filter;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Getter
 @Setter
-public class InvoiceDetailFilter implements Filter {
+public class InvoiceDetailEntityFilter implements EntityFilter {
 
     private Map<String, Object> params = new HashMap<>();
     private Long invoiceId;

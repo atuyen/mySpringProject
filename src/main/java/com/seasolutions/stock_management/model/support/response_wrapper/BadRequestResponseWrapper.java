@@ -1,9 +1,9 @@
 package com.seasolutions.stock_management.model.support.response_wrapper;
 
-public class BadRequestResponseWrapper implements WrapperResponse<Object> {
+import com.seasolutions.stock_management.model.support.enumerable.ResponseStatuses;
 
-    private final String message;
-    private final Object data;
+public class BadRequestResponseWrapper extends BaseResponseWrapper<Object> {
+
 
     public BadRequestResponseWrapper(final Object data, final String message) {
         this.data = data;
@@ -21,17 +21,8 @@ public class BadRequestResponseWrapper implements WrapperResponse<Object> {
     }
 
     @Override
-    public String getMessage() {
-        return message;
+    public ResponseStatuses getStatus() {
+        return ResponseStatuses.FAILED;
     }
 
-    @Override
-    public String getStatus() {
-        return "fail";
-    }
-
-    @Override
-    public Object getData() {
-        return data;
-    }
 }

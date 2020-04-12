@@ -1,8 +1,6 @@
 package com.seasolutions.stock_management.service.implementations;
 
 import com.seasolutions.stock_management.model.entity.Employee;
-import com.seasolutions.stock_management.model.support.SortOptions;
-import com.seasolutions.stock_management.model.support.filter.Filter;
 import com.seasolutions.stock_management.model.view_model.EmployeeViewModel;
 import com.seasolutions.stock_management.repository.interfaces.IEmployeeRepository;
 import com.seasolutions.stock_management.service.base.BaseService;
@@ -13,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 
 
 @Service

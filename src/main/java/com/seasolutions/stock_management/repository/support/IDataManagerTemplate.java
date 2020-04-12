@@ -2,7 +2,7 @@ package com.seasolutions.stock_management.repository.support;
 
 import com.seasolutions.stock_management.model.support.PaginationOptions;
 import com.seasolutions.stock_management.model.support.SortOptions;
-import com.seasolutions.stock_management.model.support.filter.Filter;
+import com.seasolutions.stock_management.model.support.entity_filter.EntityFilter;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
@@ -10,9 +10,9 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 public interface IDataManagerTemplate<T> {
-    List<T> findAll(Class<T> zClass, SortOptions sortOptions, Filter filter);
+    List<T> findAll(Class<T> zClass, SortOptions sortOptions, EntityFilter filter);
 
-    List<T> findAll(Class<T> zClass, PaginationOptions paginationOptions, SortOptions sortOptions,Filter filter, AtomicLong totalRecord);
+    List<T> findAll(Class<T> zClass, PaginationOptions paginationOptions, SortOptions sortOptions, EntityFilter filter, AtomicLong totalRecord);
 
     List<T> findDataByQuery(String query, Map<String,Object> params);
 

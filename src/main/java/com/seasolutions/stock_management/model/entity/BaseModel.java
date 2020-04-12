@@ -19,6 +19,7 @@ import java.util.Objects;
 @AllArgsConstructor
 @MappedSuperclass
 @DynamicUpdate
+@ToString
 public class BaseModel {
 
 

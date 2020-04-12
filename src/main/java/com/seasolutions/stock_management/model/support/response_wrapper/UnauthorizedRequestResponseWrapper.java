@@ -2,15 +2,14 @@ package com.seasolutions.stock_management.model.support.response_wrapper;
 
 import com.seasolutions.stock_management.model.support.enumerable.ResponseStatuses;
 
-public class FailedResponseWrapper extends BaseResponseWrapper<Void> {
+public class UnauthorizedRequestResponseWrapper extends BaseResponseWrapper<Void> {
 
-    public FailedResponseWrapper(final String message) {
-        this.message = message;
+    public UnauthorizedRequestResponseWrapper() {
+        this.message="Unauthorized";
     }
 
-    public FailedResponseWrapper() {
-        super();
-        this.message = "Failed";
+    public UnauthorizedRequestResponseWrapper(String message) {
+        this.message=message;
     }
 
     @Override
@@ -23,3 +22,6 @@ public class FailedResponseWrapper extends BaseResponseWrapper<Void> {
         return null;
     }
 }
+
+
+

@@ -1,33 +1,36 @@
 package com.seasolutions.stock_management.model.support.response_wrapper;
 
+import com.seasolutions.stock_management.model.support.enumerable.ResponseStatuses;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class ExceptionResponseWrapper  implements WrapperResponse<String>{
+public class ExceptionResponseWrapper  extends BaseResponseWrapper<List<String>> {
     private Throwable throwable;
 
-
-    public  ExceptionResponseWrapper(Throwable throwable){
+    public ExceptionResponseWrapper(Throwable throwable){
         this.throwable=throwable;
+    }
+
+
+    @Override
+    public ResponseStatuses getStatus() {
+        return ResponseStatuses.FAILED;
     }
 
     @Override
     public String getMessage() {
-        return throwable!=null?throwable.getMessage():null;
+        return  throwable!=null?throwable.getMessage():null;
     }
 
     @Override
-    public String getStatus() {
-        return "failed";
-    }
-
-    @Override
-    public String getData() {
+    public List<String> getData() {
         if(throwable!=null){
-            String stackFrames =  ExceptionUtils.getStackTrace(throwable);
-            return  stackFrames;
+            String[] stackFrames = ExceptionUtils.getStackFrames(throwable);
+            return Arrays.asList(stackFrames);
         }
-
-        return null;
+        return new ArrayList<>();
     }
 }
