@@ -1,0 +1,9 @@
+---Bai toan Authentication 1
+
+-1 company co nhiều job
+
+--super user cua company co the view tat ca job cua cty minh 
+-- manager co the co xem Nhung job minh quan ly
+--talent thi không
+
+---1 company co nhiều talent va 1 talent thuoc nhiều company, moi company thi talent se co cac role khan nhau
