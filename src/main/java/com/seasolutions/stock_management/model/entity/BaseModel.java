@@ -42,4 +42,7 @@ public class BaseModel {
 //    @UpdateTimestamp
 //    protected Timestamp updateDate;
 
+//    @Version
+//    private Long version;
+
 }

@@ -3,7 +3,7 @@ package com.seasolutions.stock_management.model.support.response_wrapper;
 
 import com.seasolutions.stock_management.model.support.enumerable.ResponseStatuses;
 
-public abstract class BaseResponseWrapper<E>  {
+public abstract class BaseResponseWrapper<E>  implements ResponseWrapper<E>{
 
 
     protected String message;
@@ -24,6 +24,7 @@ public abstract class BaseResponseWrapper<E>  {
 
     }
 
+    @Override
     public String getMessage() {
         return message;
     }
@@ -31,7 +32,7 @@ public abstract class BaseResponseWrapper<E>  {
     public void setMessage(String message) {
         this.message = message;
     }
-
+    @Override
     public ResponseStatuses getStatus() {
         return ResponseStatuses.SUCCESS;
     }
@@ -39,7 +40,7 @@ public abstract class BaseResponseWrapper<E>  {
     public void setStatus(ResponseStatuses status) {
         this.status = status;
     }
-
+    @Override
     public E getData() {
         return data;
     }

@@ -1,11 +1,12 @@
 package com.seasolutions.stock_management.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.internal.jline.internal.Nullable;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -38,8 +39,14 @@ public class Employee extends BaseModel {
 
 	private @Nullable Integer support;
 
-	@Column(name="work_day")
 
+	private String email;
+
+	@JsonIgnore
+	private String password;
+
+
+	@Column(name="work_day")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date workDay;
 
@@ -47,8 +54,15 @@ public class Employee extends BaseModel {
 	private Date birthday;
 
 	//bi-directional many-to-one association to Order
-	@OneToMany(mappedBy="employee")
-	private List<Invoice> invoices;
+	@Builder.Default
+	@OneToMany(mappedBy="employee",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Invoice> invoices = new ArrayList<>();
+
+
+	//bi-directional many-to-one association to Invite
+	@Builder.Default
+	@OneToMany(mappedBy="employee",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+	private List<Invite> invites = new ArrayList<>();
 
 
 	public Invoice addOrder(Invoice invoice) {
@@ -63,4 +77,17 @@ public class Employee extends BaseModel {
 		return invoice;
 	}
 
+	public Invite addInvite(Invite invite) {
+		getInvites().add(invite);
+		invite.setEmployee(this);
+
+		return invite;
+	}
+
+	public Invite removeInvite(Invite invite) {
+		getInvites().remove(invite);
+		invite.setEmployee(null);
+
+		return invite;
+	}
 }

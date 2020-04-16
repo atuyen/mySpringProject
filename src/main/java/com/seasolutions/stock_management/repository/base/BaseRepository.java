@@ -29,6 +29,11 @@ public class BaseRepository<T> implements IBaseRepository<T> {
     protected IDataManagerTemplate<T> dataManagerTemplate;
 
     @Override
+    public void executeQuery(String query, Map<String, Object> params) {
+        dataManagerTemplate.executeQuery(query,params);
+    }
+
+    @Override
     public List<T> findAll(SortOptions sortOptions, EntityFilter filter) {
         return dataManagerTemplate.findAll(zClass, sortOptions,filter);
     }
@@ -69,6 +74,11 @@ public class BaseRepository<T> implements IBaseRepository<T> {
     }
 
 
+    @Override
+    public List<T> test() {
+        return null;
+    }
+
     private Class<T> getGenericType() {
         Type t = getClass().getGenericSuperclass();
         if (t instanceof ParameterizedType) {
@@ -78,6 +88,8 @@ public class BaseRepository<T> implements IBaseRepository<T> {
             return null;
         }
     }
+
+
 
 
 }

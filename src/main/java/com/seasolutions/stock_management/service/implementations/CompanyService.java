@@ -23,17 +23,7 @@ public class CompanyService extends BaseService<Company, CompanyViewModel> imple
 
     @Override
     public List<CompanyViewModel> test() {
-        String query = "select co "+
-                "from Company co  join Product p on co.id = p.company.id "+
-                " join Category ca on p.category.id = ca.id " +
-                "where ca.name = 'Tu Lanh' ";
-
-
-
-
-
-
-        List<Company> companies = companyRepository.findDataByQuery(query,null);
+        List<Company> companies = companyRepository.test();
         return MappingUtils.map(companies, new TypeToken<List<CompanyViewModel>>(){}.getType());
     }
 }

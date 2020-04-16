@@ -6,7 +6,7 @@ import com.seasolutions.stock_management.model.support.enumerable.ResponseStatus
 import java.util.List;
 
 
-public class DefaultPaginatedResponseWrapper<E> extends DefaultResponseWrapper<List<E>>  {
+public class DefaultPaginatedResponseWrapper<E> extends DefaultResponseWrapper<List<E>>  implements PagingResponseWrapper<E>{
     private PaginatedResponse<E> paginatedResponse;
 
 
@@ -21,6 +21,7 @@ public class DefaultPaginatedResponseWrapper<E> extends DefaultResponseWrapper<L
         this.paginatedResponse=paginatedResponse;
     }
 
+    @Override
     public PaginatedResponse<E> getPaginatedResponse() {
         return paginatedResponse;
     }

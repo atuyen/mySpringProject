@@ -8,6 +8,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface IEmployeeService extends IBaseService<Employee, EmployeeViewModel> {
-    List<EmployeeViewModel> test();
-
+    Employee findByEmail(String email);
 }

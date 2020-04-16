@@ -22,12 +22,7 @@ public class CustomerService extends BaseService<Customer, CustomerViewModel> im
 
     @Override
     public List<CustomerViewModel> test() {
-
-        String query = "Select DISTINCT(e1) from Employee e1 "+
-                "join Employee  e2 on e1.birthday = e2.transactionName ";
-
-
-        List<Customer> customers =  customerRepository.findDataByQuery(query,null);
+        List<Customer> customers =  customerRepository.test();
         return MappingUtils.map(customers,new TypeToken<List<CustomerViewModel>>(){}.getType());
     }
 }

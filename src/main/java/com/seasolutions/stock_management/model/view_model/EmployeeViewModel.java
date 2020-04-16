@@ -2,14 +2,13 @@ package com.seasolutions.stock_management.model.view_model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jdk.internal.jline.internal.Nullable;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import lombok.experimental.SuperBuilder;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Getter
 @Setter
@@ -27,12 +26,21 @@ public class EmployeeViewModel extends BaseViewModel{
     private Date birthday;
     private Date workDay;
 
+
     private int totalSalary;
     private int totalInvoices;
 
+    private String email;
+
+    @JsonIgnore
+    private String password;
 
     @JsonIgnore
     List<InvoiceViewModel> invoices;
+
+
+    @Builder.Default
+    List<InviteViewModel> invites=new ArrayList<>();
 
 
     public int getTotalSalary() {
@@ -41,5 +49,9 @@ public class EmployeeViewModel extends BaseViewModel{
 
     public int getTotalInvoices() {
         return invoices.size();
+    }
+
+    public List<InviteViewModel> getInvites() {
+        return invites.stream().filter(i->i.getIsActive()).collect(Collectors.toList());
     }
 }

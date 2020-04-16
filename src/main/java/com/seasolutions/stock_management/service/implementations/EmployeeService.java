@@ -10,7 +10,9 @@ import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 
 @Service
@@ -19,13 +21,7 @@ public class EmployeeService extends BaseService<Employee, EmployeeViewModel> im
     IEmployeeRepository employeeRepository;
 
     @Override
-    public List<EmployeeViewModel> test() {
-        String query= String.join(" ", new String[] {
-                "select e  from Employee e ",
-                "where e.salary = (SELECT MAX(e.salary) FROM Employee e)"
-        });
-        List<Employee> employees = employeeRepository.findDataByQuery(query,null);
-        List<EmployeeViewModel> employeeViewModels = MappingUtils.map(employees,new TypeToken<List<EmployeeViewModel>>(){}.getType());
-        return employeeViewModels;
+    public Employee findByEmail(String email) {
+      return  employeeRepository.findByEmail(email);
     }
 }

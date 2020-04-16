@@ -53,12 +53,12 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
 
     @ExceptionHandler(AuthenticationException.class)
     public ResponseEntity<Object> handleAuthenticationException(final Exception e, final WebRequest request) {
-        return handleException(e, request, new UnAuthenticatedResponseWrapper(), HttpStatus.UNAUTHORIZED, false);
+        return handleException(e, request, new UnAuthenticatedResponseWrapper(e.getMessage()), HttpStatus.UNAUTHORIZED, false);
     }
 
     @ExceptionHandler(AuthorizationException.class)
     public ResponseEntity<Object> handleAuthorizationException(final Exception e, final WebRequest request) {
-        return handleException(e, request, new UnauthorizedRequestResponseWrapper(), HttpStatus.UNAUTHORIZED, false);
+        return handleException(e, request, new UnauthorizedRequestResponseWrapper(e.getMessage()), HttpStatus.UNAUTHORIZED, false);
     }
 
     @ExceptionHandler({

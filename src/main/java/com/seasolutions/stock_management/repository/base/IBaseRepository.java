@@ -17,6 +17,7 @@ public interface IBaseRepository<T> {
 
     List<T> findDataByQuery(String query, Map<String,Object> params);
 
+    void executeQuery(String query,Map<String,Object> params);
 
     T findById(long id);
 
@@ -27,5 +28,7 @@ public interface IBaseRepository<T> {
     void delete(T t);
 
     void delete(long id) throws NoSuchMethodException, InstantiationException, IllegalAccessException, InvocationTargetException;
+
+    List<T> test();
 
 }

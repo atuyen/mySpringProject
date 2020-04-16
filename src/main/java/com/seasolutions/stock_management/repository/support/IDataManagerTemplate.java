@@ -25,4 +25,6 @@ public interface IDataManagerTemplate<T> {
     void delete(Class<T> zClass,long id) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException;
 
     void delete(T t);
+
+    void executeQuery(String query,Map<String,Object> params);
 }

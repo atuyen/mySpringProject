@@ -109,6 +109,14 @@ public class DataManagerTemplate<T extends BaseModel> implements IDataManagerTem
         delete(query, t.getClass().getSimpleName());
     }
 
+    @Override
+    public void executeQuery(String query, Map<String, Object> params) {
+        logQuery("execute query ", query, params);
+        Query jpaQuery = entityManager.createQuery(query);
+        setParamsForQuery(jpaQuery, params);
+        jpaQuery.executeUpdate();
+    }
+
     private void delete(String query, String className) {
         log.info("Delete 1 entity ".concat(className));
         log.info(query);

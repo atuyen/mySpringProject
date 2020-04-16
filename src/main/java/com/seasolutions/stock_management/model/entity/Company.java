@@ -38,6 +38,10 @@ public class Company extends BaseModel {
     private List<Product> products;
 
 
+    @OneToMany(mappedBy="company")
+    private List<Invite> invites;
+
+
     public Product addProduct(Product product) {
         getProducts().add(product);
         product.setCompany(this);
