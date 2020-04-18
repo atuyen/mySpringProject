@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
+import javax.validation.ConstraintViolationException;
 
 
 @Log4j2
@@ -33,6 +34,12 @@ public class GlobalControllerExceptionHandler extends ResponseEntityExceptionHan
     })
     public ResponseEntity<Object> handleBadArgumentException(final BadArgumentException e, final WebRequest request) {
         return handleException(e, request, new BadRequestResponseWrapper(e.getData()), HttpStatus.BAD_REQUEST, false);
+    }
+    @ExceptionHandler({
+           ConstraintViolationException.class
+    })
+    public ResponseEntity<Object> handleBadArgumentException(final ConstraintViolationException e, final WebRequest request) {
+        return handleException(e, request, new BadRequestResponseWrapper(null,e.getMessage()), HttpStatus.BAD_REQUEST, false);
     }
 
     @ExceptionHandler({

@@ -53,26 +53,26 @@ public class CategoryController {
         CategoryViewModel data = categoryService.findById(id);
         return  new DefaultResponseWrapper<>(data);
     }
-
-    @Unauthenticated
-    @PostMapping(path = "/categories")
-    public CategoryViewModel add(ServletRequest request, ServletResponse response,@RequestBody CategoryViewModel productViewModel) {
-        return categoryService.add(productViewModel);
-    }
-
-
-    @Unauthenticated
-    @PatchMapping(path = "/categories")
-    public CategoryViewModel update(@RequestBody CategoryViewModel productViewModel) {
-        return categoryService.update(productViewModel);
-    }
-
-    @Unauthenticated
-    @DeleteMapping(path = "/categories/{id}")
-    public String delete(@PathVariable long id) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
-        categoryService.delete(id);
-        return "Sucess";
-    }
+//
+//    @Unauthenticated
+//    @PostMapping(path = "/categories")
+//    public CategoryViewModel add(ServletRequest request, ServletResponse response,@RequestBody CategoryViewModel productViewModel) {
+//        return categoryService.add(productViewModel);
+//    }
+//
+//
+//    @Unauthenticated
+//    @PatchMapping(path = "/categories")
+//    public CategoryViewModel update(@RequestBody CategoryViewModel productViewModel) {
+//        return categoryService.update(productViewModel);
+//    }
+//
+//    @Unauthenticated
+//    @DeleteMapping(path = "/categories/{id}")
+//    public String delete(@PathVariable long id) throws InvocationTargetException, NoSuchMethodException, InstantiationException, IllegalAccessException {
+//        categoryService.delete(id);
+//        return "Sucess";
+//    }
 
 
 }

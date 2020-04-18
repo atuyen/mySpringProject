@@ -12,7 +12,7 @@ public class SendEmailTask {
     //    3.1. Chạy lặp (Sử dụng fixedRate)
     //    sau khi deploy, cứ mỗi ngày cần phải gửi báo cáo về số lượng người mua hàng tới email của nhà bán hàng.
     //    Như vậy, ta có thể sử dụng schedule với fixedRate là 84600 (Trong đoạn code dưới đây, để là 2000ms để ta có thể nhìn dễ hơn )
-    @Scheduled(fixedRate = 2000)
+//    @Scheduled(fixedRate = 2000)
     public void scheduleTaskWithFixedRate() {
         // call send email method here
         log.info("Send email to producers to inform quantity sold items");
@@ -32,7 +32,7 @@ public class SendEmailTask {
     // Nhưng nếu việc gửi mail mất 5p, thì 1 tiếng sau đó (tức là 1h5p) thì tác vụ gửi mail mới dc gọi lần thứ 2,
     // lần này gửi mail lại mất 10p (tức là 1h15p ms hoàn thành) thì phải chờ tới 2h15p mới được gọi lại
 
-    @Scheduled(fixedDelay = 10000)
+//    @Scheduled(fixedDelay = 10000)
     public void scheduleTaskWithFixedDelay() {
         // Call send email method here
         // Pretend it takes 1000ms
@@ -51,7 +51,7 @@ public class SendEmailTask {
     //Chạy lặp với khoảng thời gian fixedRate sau khi đi deploy initialDelay (Sử dụng kết hợp fixedRate và initialDelay)
     //Gần giống như 3.1, Ở đây chỉ khác là, nếu như 3.1 bạn chạy tác vụ gửi mail ngay khi deploy xong,
     // thì initialDelay cho phép bạn thực hiện việc này sau 1 khoảng thời gian là initialDelay(miliseconds)
-    @Scheduled(fixedRate = 2000, initialDelay = 10000)
+//    @Scheduled(fixedRate = 2000, initialDelay = 10000)
     public void scheduleTaskWithInitialDelay() {
         log.info("Send email to producers to inform quantity sold items");
     }
@@ -64,7 +64,7 @@ public class SendEmailTask {
     //Cũng vẫn yêu cầu gửi mail, nhưng bạn muốn gửi vào 12h thứ 6 hàng tuần, hoặc 23h59 ngày cuối tháng .v.v.v.
     // Những thứ bên trên kia là ko đủ. Vậy bạn hãy nghĩ tới cron. Mình ví dụ, log ra màn hình vào giây 15 của mỗi phút. Ta làm như sau
     //https://www.freeformatter.com/cron-expression-generator-quartz.html
-    @Scheduled(cron = "15 * * * * ?")
+//    @Scheduled(cron = "15 * * * * ?")
     public void scheduleTaskWithCronExpression() {
         log.info("Send email to producers to inform quantity sold items");
     }
