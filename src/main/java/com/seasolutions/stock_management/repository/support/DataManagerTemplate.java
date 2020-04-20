@@ -22,9 +22,15 @@ import java.util.regex.Matcher;
 public class DataManagerTemplate<T extends BaseModel> implements IDataManagerTemplate<T> {
     private static boolean hasLogQueries = true;
 
+    @Override
+    public void setLogQuery(boolean log) {
+        hasLogQueries = log;
+    }
 
     @PersistenceContext
     private EntityManager entityManager;
+
+
 
 
     @Override
@@ -44,6 +50,16 @@ public class DataManagerTemplate<T extends BaseModel> implements IDataManagerTem
 
         Query jpaQuery = entityManager.createQuery(query);
         setParamsForQuery(jpaQuery, params);
+        return jpaQuery.getResultList();
+    }
+
+    @Override
+    public List<T> findDataByQuery(String query, Map<String, Object> params, int offset, int limit) {
+        logQuery("findAll ", query, params);
+        Query jpaQuery = entityManager.createQuery(query);
+        setParamsForQuery(jpaQuery, params);
+        jpaQuery.setFirstResult(offset);
+        jpaQuery.setMaxResults(limit);
         return jpaQuery.getResultList();
     }
 

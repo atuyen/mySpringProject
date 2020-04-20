@@ -16,6 +16,7 @@ public interface IBaseRepository<T> {
     List<T> findAll(PaginationOptions paginationOptions, SortOptions sortOptions, EntityFilter filter, AtomicLong totalRecord);
 
     List<T> findDataByQuery(String query, Map<String,Object> params);
+    List<T> findDataByQuery(String query, Map<String,Object> params,int offset,int limit);
 
     void executeQuery(String query,Map<String,Object> params);
 

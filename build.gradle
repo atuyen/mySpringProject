@@ -30,6 +30,9 @@ dependencies {
 	compile group: 'com.google.guava', name: 'guava', version: '28.2-jre'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-redis', version: '2.2.5.RELEASE'
 	compile group: 'redis.clients', name: 'jedis', version: '3.1.0'
+	compile group: 'com.mortennobel', name: 'java-image-scaling', version: '0.8.6'
+	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.2.6.RELEASE'
+	compile group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
 }
 
 test {

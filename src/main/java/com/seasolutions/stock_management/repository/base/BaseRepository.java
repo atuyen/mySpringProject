@@ -54,6 +54,11 @@ public class BaseRepository<T> implements IBaseRepository<T> {
     }
 
     @Override
+    public List<T> findDataByQuery(String query, Map<String, Object> params, int offset, int limit) {
+        return dataManagerTemplate.findDataByQuery(query,params,offset,limit);
+    }
+
+    @Override
     public T add(T t) {
         return dataManagerTemplate.add(t);
     }

@@ -34,11 +34,11 @@ public class RedisConfiguration {
 	@Bean
 	JedisConnectionFactory jedisConnectionFactory() {
 		RedisStandaloneConfiguration redisStandaloneConfiguration = new RedisStandaloneConfiguration(redisHostName, redisPort);
-//	    redisStandaloneConfiguration.setPassword(RedisPassword.of(redisPassword));
-//	    return new JedisConnectionFactory(redisStandaloneConfiguration);
+//////	    redisStandaloneConfiguration.setPassword(RedisPassword.of(redisPassword));
 		JedisConnectionFactory temp=	new JedisConnectionFactory(redisStandaloneConfiguration);
 	    temp.setTimeout(redisTimeOut);
 		return temp;
+//		return  null;
 	}
 	@Bean
 	public RedisTemplate<String, Object> redisTemplate() {

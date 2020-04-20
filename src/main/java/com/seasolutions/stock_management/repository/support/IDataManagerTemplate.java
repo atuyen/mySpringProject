@@ -10,11 +10,15 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
 public interface IDataManagerTemplate<T> {
+    void setLogQuery(boolean log);
+
     List<T> findAll(Class<T> zClass, SortOptions sortOptions, EntityFilter filter);
 
     List<T> findAll(Class<T> zClass, PaginationOptions paginationOptions, SortOptions sortOptions, EntityFilter filter, AtomicLong totalRecord);
 
     List<T> findDataByQuery(String query, Map<String,Object> params);
+
+    List<T> findDataByQuery(String query, Map<String,Object> params,int offset,int limit);
 
     T findById(Class<T> tClass, long id);
 

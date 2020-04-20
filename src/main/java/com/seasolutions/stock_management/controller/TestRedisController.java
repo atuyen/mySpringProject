@@ -1,6 +1,4 @@
 package com.seasolutions.stock_management.controller;
-
-
 import com.seasolutions.stock_management.redis.CacheService;
 import com.seasolutions.stock_management.security.annotation.Authorized;
 import com.seasolutions.stock_management.security.annotation.Unauthenticated;
@@ -11,6 +9,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class TestRedisController {
+   // https://laptrinh.vn/books/redis
+
     @Autowired
     CacheService cacheService;
 
