@@ -9,7 +9,7 @@ import org.springframework.data.redis.core.HashOperations;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Repository;
 
-@Repository
+//@Repository
 public class RedisRepositoryImpl implements RedisRepository{
 	private static final String APP_KEY = "com.gotadi.b2b";
     private RedisTemplate<String, Object> redisTemplate;

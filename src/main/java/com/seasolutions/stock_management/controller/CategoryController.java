@@ -13,6 +13,7 @@ import com.seasolutions.stock_management.model.view_model.CategoryViewModel;
 import com.seasolutions.stock_management.security.annotation.Authorized;
 import com.seasolutions.stock_management.security.annotation.Unauthenticated;
 import com.seasolutions.stock_management.service.interfaces.ICategoryService;
+import io.swagger.annotations.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,9 +32,15 @@ public class CategoryController {
 
 
 
+    @ApiOperation(value = "Tra ve tat ca category")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success", response = String.class),
+            @ApiResponse(code = 401, message = "Student not found"),
+            @ApiResponse(code = 403, message = "Exception failed")
+    })
     @GetMapping(path = "/categories")
-    public ResponseWrapper<List<CategoryViewModel>> findAll(ServletRequest request, ServletResponse response, SortOptions sortOptions,
-                                                           @RequestParam long employeeId) {
+    public ResponseWrapper<List<CategoryViewModel>> findAll( SortOptions sortOptions,
+                                            @ApiParam(value = "id de xac thuc",required = true) @RequestParam long employeeId) {
         List<CategoryViewModel> data = categoryService.findAll(sortOptions, null);
         return new DefaultResponseWrapper<>(data);
     }

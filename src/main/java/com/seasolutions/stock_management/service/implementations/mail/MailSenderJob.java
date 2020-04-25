@@ -98,16 +98,17 @@ public class MailSenderJob {
             }
         }).collect(Collectors.toList());
         List<Future<Void>> futures = executorService.invokeAll(tasks);
-        futures.forEach(it -> {
-            try {
-                it.get();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } catch (ExecutionException e) {
-                e.printStackTrace();
-            }
-        });
+//        futures.forEach(it -> {
+//            try {
+//                it.get();
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            } catch (ExecutionException e) {
+//                e.printStackTrace();
+//            }
+//        });
 
+        // kha nang phai sua lai phan nay
         return futures.size();
     }
 

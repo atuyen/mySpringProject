@@ -33,6 +33,12 @@ dependencies {
 	compile group: 'com.mortennobel', name: 'java-image-scaling', version: '0.8.6'
 	compile group: 'org.springframework.boot', name: 'spring-boot-starter-mail', version: '2.2.6.RELEASE'
 	compile group: 'org.thymeleaf', name: 'thymeleaf-spring5', version: '3.0.11.RELEASE'
+	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.2'
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.2'
+	compile group: 'org.apache.lucene', name: 'lucene-core', version: '8.5.1'
+	compile group: 'org.apache.lucene', name: 'lucene-queryparser', version: '8.5.1'
+
+
 }
 
 test {

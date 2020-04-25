@@ -7,9 +7,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.Executor;
+
 @RestController
 public class MailController {
 
+    @Autowired
+    Executor  executor;
 
     @Autowired
     MailService mailService;
@@ -19,6 +23,10 @@ public class MailController {
     public void sendMail(EmailData emailData) {
         mailService.sendMail(emailData);
     }
+
+
+
+
 
 
 }

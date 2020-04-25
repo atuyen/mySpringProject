@@ -33,18 +33,20 @@ public class AuthenticationFilter extends GenericFilterBean {
     private Tokenizer tokenizer;
 
     private static final List<AuthenticationExclusion> HARDCODED_EXCLUSIONS = Arrays.asList(
-            //exclude(RequestMethod.GET, ".*index.*"),
-            //exclude(RequestMethod.GET, "/app.*"),
-            //exclude(RequestMethod.GET, "/assets.*"),
-//            exclude(RequestMethod.GET, "/css.*"),
-//            exclude(RequestMethod.GET, "/swagger-resources"),
-//            exclude(RequestMethod.GET, "/webjars/springfox-swagger-ui/lib.*"),
-//            exclude(RequestMethod.GET, "/webjars/springfox-swagger-ui.*"),
-//            exclude(RequestMethod.GET, "/swagger-ui.html"),
-//            exclude(RequestMethod.GET, "/webjars"),
-//            exclude(RequestMethod.GET, "/configuration/ui"),
-//            exclude(RequestMethod.GET, "/images/favicon"),
-//            exclude(RequestMethod.GET, "/api-docs"),
+            exclude(RequestMethod.GET, ".*index.*"),
+            exclude(RequestMethod.GET, "/app.*"),
+            exclude(RequestMethod.GET, "/assets.*"),
+            exclude(RequestMethod.GET, "/css.*"),
+            exclude(RequestMethod.GET, "/swagger-resources"),
+//            exclude(RequestMethod.GET, "/swagger-resources/configuration/ui"),
+//            exclude(RequestMethod.GET, "/swagger-resources/configuration/security"),
+            exclude(RequestMethod.GET, "/webjars/springfox-swagger-ui/lib.*"),
+            exclude(RequestMethod.GET, "/webjars/springfox-swagger-ui.*"),
+            exclude(RequestMethod.GET, "/swagger-ui.html"),
+            exclude(RequestMethod.GET, "/webjars"),
+            exclude(RequestMethod.GET, "/configuration/ui"),
+            exclude(RequestMethod.GET, "/images/favicon"),
+            exclude(RequestMethod.GET, "/api-docs"),
             exclude(RequestMethod.POST, "/sessions")
     );
 

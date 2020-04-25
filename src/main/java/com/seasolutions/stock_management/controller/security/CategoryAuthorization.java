@@ -14,7 +14,7 @@ public class CategoryAuthorization implements Authorization {
     @Autowired
     private RequestData requestData;
 
-    public boolean findAll(ServletRequest request, ServletResponse response, SortOptions sortOptions,long employeeId){
+    public boolean findAll( SortOptions sortOptions,long employeeId){
        return  requestData.getTokenPayload().getEmployeeViewModel().getId()==employeeId;
    }
 
