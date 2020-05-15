@@ -7,6 +7,8 @@ import org.springframework.scheduling.annotation.SchedulingConfigurer;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.scheduling.config.ScheduledTaskRegistrar;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.concurrent.Executor;
@@ -19,6 +21,18 @@ public class Application implements SchedulingConfigurer {
 		SpringApplication.run(com.seasolutions.stock_management.Application.class, args);
 	}
 
+	    @Bean
+    public WebMvcConfigurer corsConfigurer() {
+        return new WebMvcConfigurer() {
+            @Override
+            public void addCorsMappings(CorsRegistry registry) {
+                registry.addMapping("/**")
+                        .allowedOrigins("*")
+                        .allowedMethods("POST","GET","PUT","PATCH","DELETE")
+                        .allowCredentials(true);
+            }
+        };
+    }
 
 
 	// Tao ra 1 excutor service bean de dung khi cung

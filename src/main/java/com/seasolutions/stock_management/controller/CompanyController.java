@@ -4,6 +4,7 @@ package com.seasolutions.stock_management.controller;
 import com.seasolutions.stock_management.model.support.SortOptions;
 import com.seasolutions.stock_management.model.support.entity_filter.CompanyEntityFilter;
 import com.seasolutions.stock_management.model.view_model.CompanyViewModel;
+import com.seasolutions.stock_management.security.annotation.Unauthenticated;
 import com.seasolutions.stock_management.service.interfaces.ICompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,21 +18,20 @@ import java.util.List;
 public class CompanyController {
 
     @Autowired
-    ICompanyService companyService;
+    public ICompanyService companyService;
 
 
     @GetMapping
-    List<CompanyViewModel> getCompanies(SortOptions sortOptions, CompanyEntityFilter filter){
-        return  companyService.findAll(sortOptions,filter);
+    public List<CompanyViewModel> getCompanies(SortOptions sortOptions, CompanyEntityFilter filter) {
+        return companyService.findAll(sortOptions, filter);
     }
 
 
-    @GetMapping
-    @RequestMapping(path = "/test")
-    List<CompanyViewModel> test(){
-        return  companyService.test();
+    @Unauthenticated
+    @GetMapping(path = "/test")
+    public List<CompanyViewModel> test() {
+        return companyService.test();
     }
-
 
 
 }

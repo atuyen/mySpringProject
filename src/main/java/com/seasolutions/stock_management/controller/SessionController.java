@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 @Log4j2
 @RestController
-@RequestMapping(path = "/sessions")
+//@RequestMapping(path = "/sessions")
 public class SessionController {
     private static final String COOKIE_AUTH_TOKEN = "token";
 
@@ -37,9 +37,8 @@ public class SessionController {
 
     @Autowired
     IEmployeeService employeeService;
-
-
-    @PostMapping
+    
+    @PostMapping(path = "/sessions")
     public ResponseWrapper<LoginResponse> startSession(@RequestBody final LoginRequest loginRequest,
                                                        final HttpServletRequest httpRequest,
                                                        final HttpServletResponse httpResponse) {

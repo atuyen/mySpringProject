@@ -22,7 +22,7 @@ import javax.servlet.ServletResponse;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
-
+//@CrossOrigin(origins ={"*"},methods = {RequestMethod.POST,RequestMethod.GET})
 @Authorized(CategoryAuthorization.class)
 @RestController
 public class CategoryController {
@@ -38,12 +38,14 @@ public class CategoryController {
             @ApiResponse(code = 401, message = "Student not found"),
             @ApiResponse(code = 403, message = "Exception failed")
     })
+    @Unauthenticated
     @GetMapping(path = "/categories")
     public ResponseWrapper<List<CategoryViewModel>> findAll( SortOptions sortOptions,
                                             @ApiParam(value = "id de xac thuc",required = true) @RequestParam long employeeId) {
         List<CategoryViewModel> data = categoryService.findAll(sortOptions, null);
         return new DefaultResponseWrapper<>(data);
     }
+
 
     @Unauthenticated
     @GetMapping(path = "/categories/paging")
@@ -60,12 +62,36 @@ public class CategoryController {
         CategoryViewModel data = categoryService.findById(id);
         return  new DefaultResponseWrapper<>(data);
     }
-//
-//    @Unauthenticated
+
+    @Unauthenticated
+    @GetMapping(path = "/test/{name}")
+    public Person test(@PathVariable String name){
+        return new Person(name);
+    }
+    @Unauthenticated
+    @GetMapping(path = "/test5")
+    public Person test(){
+        return new Person("phuong");
+    }
+
+    @Unauthenticated
+    @PostMapping(path = "/test3")
+    public Person post(){
+        return new Person("Tuy");
+    }
+
+    @Unauthenticated
+    @PostMapping(path = "/test2")
+    public Person post(@RequestBody Person person){
+        return person;
+    }
+
+
+    //    @Unauthenticated
 //    @PostMapping(path = "/categories")
-//    public CategoryViewModel add(ServletRequest request, ServletResponse response,@RequestBody CategoryViewModel productViewModel) {
-//        return categoryService.add(productViewModel);
-//    }
+    public CategoryViewModel add(ServletRequest request, ServletResponse response,@RequestBody CategoryViewModel productViewModel) {
+        return categoryService.add(productViewModel);
+    }
 //
 //
 //    @Unauthenticated
@@ -83,3 +109,23 @@ public class CategoryController {
 
 
 }
+
+class Person{
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public Person(String name) {
+        this.name = name;
+    }
+    public  Person(){
+
+    }
+
+    private String name;
+}
+
